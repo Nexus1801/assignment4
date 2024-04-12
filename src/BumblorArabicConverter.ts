@@ -44,3 +44,45 @@ export function bumblor2arabic(Bumblor: string): number{
     return isNegative ? -result : result;
 
 }
+
+export function arabic2bumblor(arabic: number) : string{
+    const bumblorNumerals: Record<number, string> = {
+        0: 'O',
+        1: 'I',
+        5: 'V',
+        10: 'X',
+        50: 'L',
+        100: 'C',
+        500: 'D',
+        1000: 'M',
+    }
+
+    // Truncate decimal numbers
+    arabic = Math.floor(arabic);
+
+    // Check for out of range
+    if (arabic < 0 || arabic > 4999) {
+        throw new Error("Out of Range");
+    }
+
+    if (arabic === 0) {
+        return 'O';
+    }
+
+    let result = '';
+    let remaining = arabic;
+
+    for (const [value, numeral] of Object.entries(bumblorNumerals).sort((a, b) => parseInt(b[0]) - parseInt(a[0]))) {
+        const numericValue = parseInt(value);
+        const count = Math.floor(remaining / numericValue);
+        remaining -= count * numericValue;
+
+        if (count === 0) {
+            continue;
+        }
+
+        result += numeral.repeat(count);
+    }
+
+    return result;
+}
