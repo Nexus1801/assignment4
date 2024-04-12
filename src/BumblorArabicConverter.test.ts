@@ -44,6 +44,30 @@ test("bumblor2arabic tests for MMXXIV", () => {
     expect(bumblor2arabic("MMXXIV")).toBe(2024)
 })
 
+test("bumblor2arabic tests for out of range (above 4999)", () => {
+    expect(() => bumblor2arabic("MMMMM")).toThrowError("Malformed Number")
+})
+
+test("bumblor2arabic tests for out of range (below -4999)", () => {
+    expect(() => bumblor2arabic("-MMMMM")).toThrowError("Malformed Number")
+})
+
+test("bumblor2arabic tests for repeated characters (within 1 for D, L, or V)", () => {
+    expect(() => bumblor2arabic("MMDD")).toThrowError("Malformed Number")
+})
+
+test("bumblor2arabic tests for repeated characters (up to 4 times for C)", () => {
+    expect(() => bumblor2arabic("CCCCC")).toThrowError("Malformed Number")
+})
+
+test("bumblor2arabic tests for repeated characters (within 4)", () => {
+    expect(bumblor2arabic("CCCC")).toBe(400)
+})
+
+test("bumblor2arabic tests for repeated characters (up to 4 times for C)", () => {
+    expect(() => bumblor2arabic("MCCCCC")).toThrowError("Malformed Number")
+})
+
 test("bumblor2arabic tests for invalid characters", () => {
     expect(() => bumblor2arabic("MMXZIV")).toThrowError("Malformed Number")
 })

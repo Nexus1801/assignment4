@@ -28,6 +28,44 @@ export function bumblor2arabic(Bumblor: string): number{
         if (currentValue === undefined) {
             throw new Error("Malformed Number");
         }
+        //The following letters – M, C, X, and I – can each be repeated up to 4 times in a row.
+        if(currentChar == "M" || currentChar === "C" || currentChar === "X" || currentChar === "I"){
+
+            let j = 0;
+            let count = 0;
+
+            for(j = 0; j <= Bumblor.length; j++){
+                if(currentChar == Bumblor[j]){
+                    count = count + 1;
+                }
+
+                //count for repeated characters, ignore currentChar so make it 5 to check
+                if(count == 5){
+                    throw new Error("Malformed Number");
+                }
+            }
+
+        }
+
+        //The following letters – D, L, V – can each appear only once.
+        if(currentChar === "D" || currentChar === "L" || currentChar === "V"){
+
+            let k = 0;
+            let count = 0;
+
+            for(k = 0; k <= Bumblor.length; k++){
+                if(currentChar == Bumblor[k]){
+                    count = count + 1;
+                }
+
+                //count for repeated characters, ignore currentChar so make it 2 to check
+                if(count == 2){
+                    throw new Error("Malformed Number");
+                }
+            }
+
+        }
+
 
         if (currentValue < prevValue) {
             if (prevValue / currentValue > 10) {
@@ -41,7 +79,15 @@ export function bumblor2arabic(Bumblor: string): number{
         prevValue = currentValue;
     }
 
+    //Truncate Result
+    result = Math.floor(result);
+
+    if(result > 4999 || result < -4999){
+        throw new Error("Malformed Number");
+    }
+
     return isNegative ? -result : result;
+
 
 }
 
