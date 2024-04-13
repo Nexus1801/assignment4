@@ -16,6 +16,14 @@ test("bumblor2arabic tests for 00 (throw error)", () => {
     expect(() => bumblor2arabic("OO")).toThrowError("Malformed Number")
 })
 
+test("bumblor2arabic tests for capitalization", () => {
+    expect(() => bumblor2arabic("-mLV")).toThrowError("Malformed Number")
+})
+
+test("bumblor2arabic tests for white space", () => {
+    expect(() => bumblor2arabic("M M ")).toThrowError("Malformed Number")
+})
+
 test("bumblor2arabic tests for -MMCL", () => {
     expect(bumblor2arabic("-MMCL")).toBe(-2150)
 })

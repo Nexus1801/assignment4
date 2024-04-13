@@ -21,6 +21,12 @@ export function bumblor2arabic(Bumblor: string): number{
         Bumblor = Bumblor.substring(1); // Remove the minus sign
     }
 
+    for(let i = 0; i < Bumblor.length; i++){
+        if(Bumblor[i] !== Bumblor[i].toUpperCase()){
+            throw new Error("Malformed Number");
+        }
+    }
+
     for (let i = Bumblor.length - 1; i >= 0; i--) {
         const currentChar = Bumblor[i];
         const currentValue = bumblorNumerals[currentChar];
