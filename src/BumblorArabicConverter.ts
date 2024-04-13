@@ -63,7 +63,19 @@ export function bumblor2arabic(Bumblor: string): number{
                     throw new Error("Malformed Number");
                 }
             }
+        }
 
+        if (currentChar === "O"){
+            let l = 0;
+            let count = 0;
+
+            for(l = 0; l <= Bumblor.length; l++){
+                count += 1;
+                //count for repeated characters, ignore currentChar so make it 2 to check
+                if(count == 3){
+                    throw new Error("Malformed Number");
+                }
+            }
         }
 
 
@@ -78,9 +90,6 @@ export function bumblor2arabic(Bumblor: string): number{
 
         prevValue = currentValue;
     }
-
-    //Truncate Result
-    result = Math.floor(result);
 
     if(result > 4999 || result < -4999){
         throw new Error("Malformed Number");

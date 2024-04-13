@@ -8,6 +8,14 @@ test("bumblor2arabic tests for MMCL", () => {
     expect(bumblor2arabic("MMCL")).toBe(2150)
 })
 
+test("bumblor2arabic tests for O", () => {
+    expect(bumblor2arabic("O")).toBe(0)
+})
+
+test("bumblor2arabic tests for 00 (throw error)", () => {
+    expect(() => bumblor2arabic("OO")).toThrowError("Malformed Number")
+})
+
 test("bumblor2arabic tests for -MMCL", () => {
     expect(bumblor2arabic("-MMCL")).toBe(-2150)
 })
@@ -16,8 +24,8 @@ test("bumblor2arabic tests for MMMMDCCCC", () => {
     expect(bumblor2arabic("MMMMDCCCC")).toBe(4900)
 })
 
-test("bumblor2arabic tests for MDD", () => {
-    expect(bumblor2arabic("MDD")).toBe(2000)
+test("bumblor2arabic tests for MD", () => {
+    expect(bumblor2arabic("MD")).toBe(1500)
 })
 
 test("bumblor2arabic tests for III", () => {
